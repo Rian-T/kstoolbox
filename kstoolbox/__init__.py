@@ -1,12 +1,8 @@
-from pathlib import Path
 import shutil
 import os
-#from PIL import Image
 
-path_img = Path('/content/image_data')
-
-def delete_classe(dir : str):
-    if(os.path.isdir(f'/content/image_data/{dir}')):
-        shutil.rmtree(f'/content/image_data/{dir}')
+def delete_class(class_name : str):
+    if(os.path.isdir(f'/dataset/{class_name}')):
+        shutil.rmtree(f'/dataset/{class_name}')
     else:
-        print(f"{dir} doesn't exist")
+        print(f"{class_name} doesn't exist")
