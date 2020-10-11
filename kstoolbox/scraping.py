@@ -17,7 +17,6 @@ def download_from_google_images(keywords : str, limit : int, directory : str):
 
     json_res = json.loads(res.text)
     print(len(json_res), "urls fetched")
-    return
     os.makedirs(directory, exist_ok=True)
 
     print("Downloading images...")
