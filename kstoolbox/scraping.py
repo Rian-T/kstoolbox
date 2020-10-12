@@ -1,8 +1,16 @@
 import requests
 import json
 import os
+import shutil
+from pathlib import Path
 from PIL import Image
 from progressbar import progressbar
+
+os.makedirs("dataset", exist_ok=True)
+
+dirpath = Path('/content/sample_data')
+if dirpath.exists() and dirpath.is_dir():
+  shutil.rmtree(dirpath)
 
 def download_from_google_images(keywords : str, limit : int, class_name : str):
 
@@ -15,6 +23,10 @@ def download_from_google_images(keywords : str, limit : int, class_name : str):
 
     os.makedirs("dataset", exist_ok=True)
 
+    dirpath = Path('/content/sample_data')
+    if dirpath.exists() and dirpath.is_dir():
+      shutil.rmtree(dirpath)
+      
     url = 'https://us-central1-kasar-lab.cloudfunctions.net/scrapeImages'
     args = {'keywords': keywords, 'limit': limit}
 
@@ -44,8 +56,11 @@ def download_image(image_url, class_name):
     except:
         return
 
-    with open(path, 'wb') as handler:
-        handler.write(img_data)
+    try:
+        with open(path, 'wb') as handler:
+            handler.write(img_data)
+    except:
+        return
 
     # verify it is not corrupted
     try:
@@ -54,6 +69,3 @@ def download_image(image_url, class_name):
     except (IOError, SyntaxError) as e:
         os.remove(path)
         print('Bad file:', filename) # print out the names of corrupt files
-
-if __name__ == "__main__":
-    download_from_google_images("souris ordinateur", 50, "pas_mangeable/")

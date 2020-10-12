@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="kstoolbox", # Replace with your own username
-    version="0.0.9",
+    version="0.0.11",
     author="Rian Touchent",
     author_email="riantouchent@gmail.com",
     description="Small toolbox for AI Hackathon",
